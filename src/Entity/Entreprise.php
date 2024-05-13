@@ -19,8 +19,11 @@ class Entreprise extends User
     #[ORM\OneToMany(targetEntity: Stage::class, mappedBy: 'id_entreprise')]
     private Collection $stages;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $categorie = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $categorie = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $nom_entreprise = null;
 
     public function __construct()
     {
@@ -58,14 +61,26 @@ class Entreprise extends User
         return $this;
     }
 
-    public function getCategorie(): ?array
+    public function getCategorie(): ?string
     {
         return $this->categorie;
     }
 
-    public function setCategorie(?array $categorie): static
+    public function setCategorie(?string $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    public function getNomEntreprise(): ?string
+    {
+        return $this->nom_entreprise;
+    }
+
+    public function setNomEntreprise(string $nom_entreprise): static
+    {
+        $this->nom_entreprise = $nom_entreprise;
 
         return $this;
     }

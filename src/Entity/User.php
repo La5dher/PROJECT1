@@ -41,7 +41,7 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
@@ -56,8 +56,11 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private ?array $adresse = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $email = null;
+    #[ORM\Column(length:255, nullable: true)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
 
     public function getId(): ?int
     {
@@ -206,14 +209,26 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEmail(): ?array
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(?array $email): static
+    public function setEmail(?string $email): static
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
 
         return $this;
     }

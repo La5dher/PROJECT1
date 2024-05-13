@@ -1,21 +1,48 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("build/app.css") }}">
+{% endblock %}
 {% block body %}
-    <h1>Register</h1>
+    <div class="cont"> 
+        <div class="bo form-bo">
+            <img class='imglogo'src={{asset('images/loggoo.png')}}>
+            <h1>Company register</h1> 
 
-    {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.login) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.categorie) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            {{ form_start(registrationForm) }}
+                <div class="field_in">
+                    {{ form_row(registrationForm.login, {'label':'Username','attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.plainPassword, {'label': 'Password', 'attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.nom, {'label': 'Last Name','attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.prenom, {'label': 'First Name ', 'attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.nom_entreprise, {'label': 'Company Name ', 'attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.email, {'label': 'Email', 'attr': {'class': 'input'}}) }}
+                </div>
+                <div class="field_in">
+                    {{ form_row(registrationForm.categorie, {'label': 'Category','attr': {'class': 'input'}}) }}
+                </div>
+               
+                <div class="checkboxx">
+                    {{ form_row(registrationForm.agreeTerms,{'label':'I agree to the terms and conditions'}) }}
+                </div>
+                <div class="field">
+                    <button type="submit" class="btnn">Register</button>
+                </div>
+            {{ form_end(registrationForm) }}
+            <p style="text-align: center; color: black; font-size: 14px; margin: 5px 0;">Already have an account? <span class="span"><a href="{{ path('app_login') }}">Login</a></span></p>
+        </div>
+    </div>
 {% endblock %}

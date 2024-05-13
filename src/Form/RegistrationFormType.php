@@ -19,6 +19,14 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('categorie')
             ->add('nom')
+            ->add('prenom')
+            ->add('email', \Symfony\Component\Form\Extension\Core\Type\TextType::class, [
+                'attr' => [
+                    'placeholder' => "exemple@gmail.com",
+                    'label' => false, 
+                ]
+            ])
+            ->add('nom_entreprise')
             ->add('login')
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
@@ -27,6 +35,9 @@ class RegistrationFormType extends AbstractType
                         'message' => 'You should agree to our terms.',
                     ]),
                 ],
+                'attr'=>[
+                    'label' => false,
+                ]
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
