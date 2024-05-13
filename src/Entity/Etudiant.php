@@ -24,8 +24,7 @@ class Etudiant extends User
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date_naissance = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $prenom = null;
+  
 
     /**
      * @var Collection<int, Stage>
@@ -93,17 +92,6 @@ class Etudiant extends User
         return $this;
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(string $prenom): static
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Stage>
