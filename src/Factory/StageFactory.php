@@ -49,7 +49,8 @@ final class StageFactory extends ModelFactory
         return [
             'date_debut' => self::faker()->dateTime(),
             'date_fin' => self::faker()->dateTime(),
-            'titre' => self::faker()->text(255),
+            'titre' => self::faker()->word(),
+            'description' => self::faker()->text(255),
         ];
     }
 
