@@ -18,7 +18,7 @@ class StageController extends AbstractController
     public function index(StageRepository $stageRepository): Response
     {
         return $this->render('stage/index.html.twig', [
-            'stages' => $stageRepository->findAll(),
+            'stages' => $stageRepository->affichePage(),
         ]);
     }
 
@@ -78,4 +78,34 @@ class StageController extends AbstractController
 
         return $this->redirectToRoute('app_stage_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/find/{name}', name: 'app_stage_search', methods: ['GET'])]
+    public function findName(StageRepository $stageRepository,Request $request): Response
+    {
+        #explode("?",explode("/",$request)[3])[0])
+        return $this->render('stage/index.html.twig', [
+            'stages' => $stageRepository->findByTitre(explode("?",explode("/",$request)[3])[0]),
+        ]);
+    }
+
+
+
+    public function findBySearch(SearchData $searchData): PaginationInterface{
+
+        $data = $this->createQueryBuilder('p')
+            ->where('p.state LIKE :state')
+            ->setParameter('state', '%STATE_PUBLISHED%' )
+            ->addOrderBy('p.createdAt', 'DESC');
+
+        if (!empty($searchData->q)) {
+        // Search on post's title
+        $data = $data
+            ->andWhere('p.title LIKE :q')
+            ->setParameter('q', "%{$searchData->q}%");
+
+        }
+        $data = $data
+            ->getQuery()
+            ->getResult();
+}
 }

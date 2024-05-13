@@ -99,9 +99,9 @@
     <div class="main_container">
         <div class="search_container">
             <h5>VOTRE STAGE DE RÊVE EST ICI</h5>
-        <form action="">
+        <form action="{{ path('app_stage_search', {'name':  'ti' }) }}">
             <div class="searchjob">
-                <input type="text" class="search_input_job" placeholder="Search Internship">
+                <input id="searchy" type="text" class="search_input_job" placeholder="Search Internship">
                 <button class="searchbutton"><span class="search-icon-job material-symbols-outlined">search</span></button>
             </div>
         </form>
