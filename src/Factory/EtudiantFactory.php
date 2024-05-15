@@ -48,12 +48,13 @@ final class EtudiantFactory extends ModelFactory
     {
         return [
             'NCE' => self::faker()->randomNumber(),
-            'institut' => self::faker()->text(255),
-            'login' => self::faker()->text(180),
-            'niveau' => self::faker()->text(255),
-            'nom' => self::faker()->FirstName(255),
-            'password' => self::faker()->text(),
-            'prenom' => self::faker()->LastName(255),
+            'institut' => self::faker()->word(),
+            'login' => self::faker()->unique()->word(),
+            'niveau' => self::faker()->word(),
+            'nom' => self::faker()->word(),
+            'password' => self::faker()->word(),
+            'prenom' => self::faker()->word(),
+
             'roles' => [],
         ];
     }

@@ -47,12 +47,13 @@ final class EntrepriseFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'categorie' => self::faker()->text(180),
-            'login' => self::faker()->text(180),
-            'nom' => self::faker()->text(255),
-            'prenom'=>self::faker()->text(255),
-            'nom_entreprise'=>self::faker()->text(255),
-            'password' => self::faker()->text(),
+            'categorie' => self::faker()->word(),
+            'login' => self::faker()->unique()->word(),
+            'nom' => self::faker()->word(),
+            'prenom'=>self::faker()->word(),
+            'description'=>self::faker()->text(),
+            'nom_entreprise'=>self::faker()->word(),
+            'password' => self::faker()->word(),
             'roles' => [],
         ];
     }

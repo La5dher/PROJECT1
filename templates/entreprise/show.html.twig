@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Entreprise{% endblock %}
+
+{% block body %}
+    <h1>Entreprise</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entreprise.id }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ entreprise.login }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ entreprise.roles ? entreprise.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ entreprise.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ entreprise.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ entreprise.description }}</td>
+            </tr>
+            <tr>
+                <th>Reseaux_sociaux</th>
+                <td>{{ entreprise.reseauxSociaux ? entreprise.reseauxSociaux|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ entreprise.telephone ? entreprise.telephone|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fixe</th>
+                <td>{{ entreprise.fixe ? entreprise.fixe|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ entreprise.adresse ? entreprise.adresse|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ entreprise.email }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ entreprise.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ entreprise.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Nom_entreprise</th>
+                <td>{{ entreprise.nomEntreprise }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_entreprise_index') }}">back to list</a>
+{% endblock %}
