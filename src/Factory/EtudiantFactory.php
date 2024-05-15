@@ -51,9 +51,9 @@ final class EtudiantFactory extends ModelFactory
             'institut' => self::faker()->text(255),
             'login' => self::faker()->text(180),
             'niveau' => self::faker()->text(255),
-            'nom' => self::faker()->text(255),
+            'nom' => self::faker()->FirstName(255),
             'password' => self::faker()->text(),
-            'prenom' => self::faker()->text(255),
+            'prenom' => self::faker()->LastName(255),
             'roles' => [],
         ];
     }

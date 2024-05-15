@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        EtudiantFactory::createMany(100);
+        EtudiantFactory::createMany(10);
         StageFactory::createMany(50);
         EntrepriseFactory::createMany(3);
     }
