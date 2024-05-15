@@ -11,6 +11,6 @@ class IndexingController extends AbstractController
     #[Route('/', name: 'app_indexing')]
     public function index(): Response
     {
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_stage_index');
     }
 }

@@ -77,12 +77,13 @@
                 <span class="search-icon material-symbols-outlined">search</span>
                      <input type="text" class="search_input" placeholder="Search">
             </div>
-        </form>
+        </form>#}
         <div class="user">
             <img class="ProfilePic" src="{{asset('build/images/testProfilePix.jpg')}}" alt="">
             <!--Interpolate-->
             <span>G.Othmanni</span>
         </div>
+        
 {#
         <div class="other">
             <div class="icon">
@@ -95,10 +96,27 @@
 
 #}
     </nav>
-
+    
     <div class="main_container">
         <div class="search_container">
             <h5>VOTRE STAGE DE RÊVE EST ICI</h5>
+        <div class="">
+
+
+
+        {% if app.user %}
+            <form action="{{ path('app_user_show', {'id': app.user.id}) }}">
+                <button type="submit" class="btn btn-primary button_blue">account details</button>
+            </form>
+        {% endif %}
+
+
+
+
+            <form action="/{{app.user? 'logout':'login'}}">
+                <button type="submit" class="btn btn-primary button_blue">{{app.user? 'logout':'login'}}</button>
+            </form>
+        </div>
         <form action="{{ path('app_stage_search', {'name':  'similique' }) }}">
             <div class="searchjob">
                 <input id="searchy" type="text" class="search_input_job" placeholder="Search Internship">
