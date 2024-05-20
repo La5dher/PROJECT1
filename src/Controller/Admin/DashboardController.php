@@ -31,7 +31,7 @@ class DashboardController extends AbstractDashboardController
     {
         #$this->denyAccessUnlessGranted('ROLE_ADMIN');
         #$this->denyAccessUnlessGranted(attribute: "IS_AUTHENTIFICATED_FULLY");
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
+        #$this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         $url = $this->adminUrlGenerator
         ->setController(EtudiantCrudController::class)
         ->generateUrl();

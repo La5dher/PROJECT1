@@ -78,11 +78,15 @@
                      <input type="text" class="search_input" placeholder="Search">
             </div>
         </form>
-        <div class="user">
-            <img class="ProfilePic" src="{{asset('build/images/testProfilePix.jpg')}}" alt="">
+        <span>
+            <form action="{{ path('app_logout') }}" method="post">
+                <button type="submit" class="btnn btn-danger">Logout</button>
+            </form>
+        </span>
+            <div class="user">
+                <img class="ProfilePic" src="{{asset('images/image.png')}}" alt="">
             <!--Interpolate-->
-            <span>G.Othmanni</span>
-        </div>
+            </div>
 {#
         <div class="other">
             <div class="icon">
