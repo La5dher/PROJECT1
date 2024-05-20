@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New stage{% endblock %}
+{% block title %}New Experience{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
@@ -57,7 +57,7 @@
                     </a>
                     <h1>{{ app.user.login }}</h1>
                         
-                        <p>{{ app.user.nomEntreprise }}</p>
+                        <p>{{ app.user.getNCE() }}</p>
                    
                     <p>{{ app.user.email }}</p>
                 </div>
@@ -65,13 +65,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_user_index') }}"><i class="fa fa-user"></i> Profile</a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-calendar"></i> Internship requested</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_user_edit', {'id': app.user.id}) }}"><i class="fa fa-edit"></i> Edit profile</a>
                     </li>
                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_stage_new')}}"><i class="fa fa-edit"></i> Add Intern</a>
+                   <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_certificat_new')}}"><i class="fa fa-edit"></i> Add Certificate</a>
+                        <a class="nav-link" href="{{ path('app_experience_new')}}"><i class="fa fa-edit"></i> Add Experience</a>
                     </li>
                    
                 </ul>
@@ -82,8 +85,8 @@
     <div class="profile-info col-md-12" style="margin-left:50%; width:500px;">
         <div class="card">
             <div class="card-body">
-                <h1 class="texth">Add Intern<span style="display:none">{{ form_row(form.id_entreprise, {'value': app.user.getId()}) }}</span></h1>
-                   {{ include('stage/_form.html.twig') }}
+                <h1 class="texth">Add Experience<span >{{ form_row(form.id_etudiant,{'value': app.user.getId()})}}</span></h1>
+                   {{ include('experience/_form.html.twig') }}
                 
             </div>
         </div>

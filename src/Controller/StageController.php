@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Stage;
 use App\Form\StageType;
+use App\Model\SearchData;
 use App\Repository\StageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,7 +34,7 @@ class StageController extends AbstractController
             $entityManager->persist($stage);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_stage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('stage/new.html.twig', [
@@ -59,7 +60,7 @@ class StageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_stage_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('stage/edit.html.twig', [
@@ -71,12 +72,16 @@ class StageController extends AbstractController
     #[Route('/{id}', name: 'app_stage_delete', methods: ['POST'])]
     public function delete(Request $request, Stage $stage, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($stage);
-            $entityManager->flush();
+        
+        if ($this->isCsrfTokenValid('delete'.$stage->getId(), $request->request->get('_token'))) {
+                $entityManager->remove($stage);
+                $entityManager->flush();
+        $this->addFlash('success', 'Stage deleted successfully');
+        } else {
+            $this->addFlash('error', 'Invalid CSRF token');
         }
 
-        return $this->redirectToRoute('app_stage_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_user_index'); 
     }
 
     #[Route('/find/{name}', name: 'app_stage_search', methods: ['GET'])]
@@ -91,7 +96,6 @@ class StageController extends AbstractController
 
 
     public function findBySearch(SearchData $searchData): PaginationInterface{
-
         $data = $this->createQueryBuilder('p')
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%' )

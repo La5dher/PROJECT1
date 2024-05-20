@@ -1,55 +1,227 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Profile{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Login</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Reseaux_sociaux</th>
-                <th>Telephone</th>
-                <th>Fixe</th>
-                <th>Adresse</th>
-                <th>Email</th>
-                <th>Prenom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.login }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.description }}</td>
-                <td>{{ user.reseauxSociaux ? user.reseauxSociaux|join(', ') : '' }}</td>
-                <td>{{ user.telephone ? user.telephone|join(', ') : '' }}</td>
-                <td>{{ user.fixe ? user.fixe|join(', ') : '' }}</td>
-                <td>{{ user.adresse ? user.adresse|join(', ') : '' }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="13">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_user_index') }}">Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Professional
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('app_stage_index') }}">Intern</a>
+                    <a class="dropdown-item" href="{{ path('app_entreprise_index') }}">Companies</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <form class="form-inline my-2 my-lg-0 ml-2" action="{{ app.user ? path('app_logout') : path('app_login') }}">
+            <button type="submit" class="btn btn-outline-info">{{ app.user ? 'Logout' : 'Login' }}</button>
+        </form>
+    </div>
+</nav>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-3">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar">
+                    </a>
+                    <h1>{{ app.user.login }}</h1>
+                    {% if type == 'etudiant' %}
+                        <p>{{ app.user.NCE }}</p>
+                    {% elseif type == 'entreprise' %}
+                        <p>{{ app.user.nomEntreprise }}</p>
+                    {% endif %}
+                    <p>{{ app.user.email }}</p>
+                </div>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_user_index') }}"><i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    {% if type == 'etudiant' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-calendar"></i> Internship requested</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_user_edit', {'id': app.user.id}) }}"><i class="fa fa-edit"></i> Edit profile</a>
+                    </li>
+                    {% if type == 'entreprise' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_stage_new')}}"><i class="fa fa-edit"></i> Add Intern</a>
+                    </li>
+                    {% endif %}
+                    {% if type == 'etudiant' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_certificat_new')}}"><i class="fa fa-edit"></i> Add Certificate</a>
+                        <a class="nav-link" href="{{ path('app_experience_new')}}"><i class="fa fa-edit"></i> Add Experience</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <div class="profile-info col-md-9">
+            <div class="card">
+                <div class="bio-graph-heading card-heading">
+                    {{ app.user.description }}
+                </div>
+                <div class="card-body">
+                    <h1 class="texth">Bio Graph</h1>
+                    <div class="row">
+                        <div class="bio-row">
+                            <p><span>First Name </span>: {{ app.user.prenom }}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Last Name </span>: {{ app.user.nom }}</p>
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Address </span>: {{ app.user.adresse }}</p>
+                        </div>
+                        <div class="bio-row">
+                        {% if type == 'etudiant' %}
+                            <p><span>Birthday </span>: {{ app.user.dateNaissance|date('Y-m-d') }}</p>
+                        {% elseif type == 'entreprise' %}
+                            <p><span>Creation Date </span>: {{ app.user.dateDeCreation|date('Y-m-d') }}</p>
+                        {% endif %}
+                        </div>
+                        <div class="bio-row">
+                        {% if type == 'etudiant' %}
+                            <p><span>Level </span>: {{ app.user.niveau }}</p>
+                        {% elseif type == 'entreprise' %}
+                            <p><span>Category </span>: {{ app.user.categorie }}</p>
+                        {% endif %}
+                        </div>
+                        <div class="bio-row">
+                        {% if type == 'etudiant' %}
+                            <p><span>Institute </span>: {{ app.user.institut }}</p>
+                        {% elseif type == 'entreprise' %}
+                            <p><span>Fax </span> : 
+                            {{app.user.fixe}}
+                            </p>
+                        {% endif %}
+                        </div>
+                        <div class="bio-row">
+                        {% if type == 'etudiant' %}
+                            <p><span>Mobile </span>: 
+                            {{app.user.telephone}} **
+                            {{app.user.fixe}}
+                            </p>
+                        {% elseif type == 'entreprise' %}
+                            <p><span>Mobile </span>: {{app.user.telephone}}
+                        {% endif %}
+                        </div>
+                        <div class="bio-row">
+                            <p><span>Social networks </span>:
+                                <a>{{app.user.reseauxSociaux}}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% if type == 'etudiant' %}
+            <div class="row">
+                <div class="profile-nav col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="texth">Experiences</h1>
+                            <div class="bio-desk">
+                                {% for exp in app.user.realisations%}
+                                    {% if exp.type == 'experience' %}
+                                    <div style="clear: both; margin-bottom: 10px;">
+                                         <a href="{{ path('app_experience_edit', {'id': exp.id}) }}" style="float: right;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg> </a>
+                                        <h4 class="purple">{{ exp.titre }}</h4>
+                                        <p>Duration : {{ exp.duree|date('Y-m-d')}}</p>
+                                        <p>Description: {{ exp.description }}</p>
+                                        <p>Place : {{ exp.place }}</p>
+                                    </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="profile-nav col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="texth">Certificates</h1>
+                            <div class="bio-desk">
+                                {% for cer in app.user.realisations %}
+                                    {% if cer.type == 'certificat' %}
+                                    <div style="clear: both; margin-bottom: 10px;">
+                                        <a href="{{ path('app_certificat_edit', {'id': cer.id}) }}" style="float: right;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg> </a>
+                                        <h4 class="red">{{ cer.titre }}</h4>
+                                        <p>Domain : {{ cer.domaine }}</p>
+                                        <p>Level : {{ cer.niveau }}</p>
+                                        <p>Description : {{ cer.description }}</p>
+                                        <p>Place : {{ cer.place }}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif%}
+            {% if type == 'entreprise' %}
+    <div class="row">
+        <div class="profile-nav col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="texth">Itern</h1>
+                    <div class="bio-desk">
+                        {% for stage in app.user.stages %}
+                            <div style="clear: both; margin-bottom: 10px;">
+                                <a href="{{ path('app_stage_edit', {'id': stage.id}) }}" style="float: right;"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"/></svg> </a>
+                                <h4 class="purple" style="font-size:30px">{{ stage.titre }}</h4>
+                                <p>Description : {{ stage.description }}</p>
+                                <p>Start Date : {{ stage.dateDebut|date('Y-m-d') }}</p>
+                                <p>End Day : {{ stage.dateFin|date('Y-m-d') }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 {% endblock %}
