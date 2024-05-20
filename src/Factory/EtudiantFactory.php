@@ -46,14 +46,16 @@ final class EtudiantFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $faker = self::faker();
         return [
-            'NCE' => self::faker()->randomNumber(),
-            'institut' => self::faker()->text(255),
-            'login' => self::faker()->text(180),
-            'niveau' => self::faker()->text(255),
-            'nom' => self::faker()->FirstName(255),
-            'password' => self::faker()->text(),
-            'prenom' => self::faker()->LastName(255),
+            'NCE' => $faker->randomNumber(), // Generates a random number
+            'institut' => $faker->text(255), // Generates text up to 255 characters
+            'login' => $faker->userName(), // Generates a realistic username
+            'niveau' => $faker->text(255), // Generates text up to 255 characters
+            'nom' => $faker->lastName(), // Generates a realistic last name
+            'password' => $faker->password(), // Generates a secure password
+            'prenom' => $faker->firstName(), // Generates a realistic first name
+            #'roles' => $faker->randomElements(['ROLE_USER', 'ROLE_ADMIN'], 1), // Randomly selects 1 role
             'roles' => [],
         ];
     }

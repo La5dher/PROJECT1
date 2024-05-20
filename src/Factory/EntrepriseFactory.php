@@ -48,11 +48,12 @@ final class EntrepriseFactory extends ModelFactory
     {
         return [
             'categorie' => self::faker()->text(180),
-            'login' => self::faker()->text(180),
-            'nom' => self::faker()->text(255),
-            'prenom'=>self::faker()->text(255),
-            'nom_entreprise'=>self::faker()->text(255),
-            'password' => self::faker()->text(),
+            'login' => self::faker()->userName(180),
+            'nom' => self::faker()->lastName(255),
+            'prenom'=>self::faker()->firstName(255),
+            'nom_entreprise'=>self::faker()->company(255),
+            'password' => self::faker()->password(),
+            #'roles' => $faker->randomElements(['ROLE_USER', 'ROLE_ADMIN'], 1),
             'roles' => [],
         ];
     }

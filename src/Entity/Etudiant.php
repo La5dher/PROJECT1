@@ -18,7 +18,7 @@ class Etudiant extends User
     #[ORM\Column(length: 255)]
     private ?string $niveau = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 254)]
     private ?string $institut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]

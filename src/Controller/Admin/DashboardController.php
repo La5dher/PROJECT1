@@ -14,7 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 #use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+##[IsGranted('ROLE_ADMIN')]
 class DashboardController extends AbstractDashboardController
 {
 
@@ -23,9 +25,13 @@ class DashboardController extends AbstractDashboardController
     ) {
     }
 
+    ##[IsGranted('ROLE_SUPER_ADMIN', message: 'You are not allowed to access the admin dashboard.')]
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
+        #$this->denyAccessUnlessGranted('ROLE_ADMIN');
+        #$this->denyAccessUnlessGranted(attribute: "IS_AUTHENTIFICATED_FULLY");
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', null, 'User tried to access a page without having ROLE_ADMIN');
         $url = $this->adminUrlGenerator
         ->setController(EtudiantCrudController::class)
         ->generateUrl();

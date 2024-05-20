@@ -1,4 +1,32 @@
 <h1>Hi!</h1>
+{% block stylesheets %}
+    <style>
+        body {
+            font-family: "Amiko", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container{
+            border-bottom: 1px solid gainsboro;
+            margin-top: 150px;
+        }
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+{% endblock %}
 
 <p>To reset your password, please visit the following link</p>
 

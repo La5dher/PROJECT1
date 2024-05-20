@@ -17,6 +17,7 @@ class StageController extends AbstractController
     #[Route('/', name: 'app_stage_index', methods: ['GET'])]
     public function index(StageRepository $stageRepository): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         return $this->render('stage/index.html.twig', [
             'stages' => $stageRepository->affichePage(),
         ]);
