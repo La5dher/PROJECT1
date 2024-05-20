@@ -26,6 +26,9 @@ class Realisation
     #[ORM\ManyToOne(inversedBy: 'realisations')]
     private ?Etudiant $id_etudiant = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $place = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,6 +66,18 @@ class Realisation
     public function setIdEtudiant(?Etudiant $id_etudiant): static
     {
         $this->id_etudiant = $id_etudiant;
+
+        return $this;
+    }
+
+    public function getPlace(): ?string
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?string $place): static
+    {
+        $this->place = $place;
 
         return $this;
     }

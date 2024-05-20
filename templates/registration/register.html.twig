@@ -7,7 +7,7 @@
 {% block body %}
     <div class="cont"> 
         <div class="bo form-bo">
-            <img class='imglogo'src={{asset('images/loggoo.png')}}>
+            <img class='imglogo'src={{asset('images/logo.png')}}>
             <h1>Company register</h1> 
 
             {{ form_errors(registrationForm) }}
@@ -34,7 +34,9 @@
                 <div class="field_in">
                     {{ form_row(registrationForm.categorie, {'label': 'Category','attr': {'class': 'input'}}) }}
                 </div>
-               
+               <div class="field_in">
+                    {{ form_row(registrationForm.date_de_creation, {'label': 'Creation Date','attr': {'class': 'input'}}) }}
+                </div>
                 <div class="checkboxx">
                     {{ form_row(registrationForm.agreeTerms,{'label':'I agree to the terms and conditions'}) }}
                 </div>

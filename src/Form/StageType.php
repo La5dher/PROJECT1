@@ -15,23 +15,29 @@ class StageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre')
-            ->add('description')
+            ->add('titre',null,[
+                'label' => 'Itern name'
+            ])
+            ->add('description',null,[
+                'label' => 'Description'
+            ])
             ->add('date_debut', null, [
                 'widget' => 'single_text',
+                'label'=>'End date'
             ])
             ->add('date_fin', null, [
                 'widget' => 'single_text',
+                'label'=>'Start date'
             ])
             ->add('id_entreprise', EntityType::class, [
                 'class' => Entreprise::class,
                 'choice_label' => 'id',
             ])
-            ->add('id_etudiant', EntityType::class, [
+            /*->add('id_etudiant', EntityType::class, [
                 'class' => Etudiant::class,
                 'choice_label' => 'id',
                 'multiple' => true,
-            ])
+            ])*/
         ;
     }
 

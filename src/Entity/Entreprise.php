@@ -25,6 +25,9 @@ class Entreprise extends User
     #[ORM\Column(length: 255)]
     private ?string $nom_entreprise = null;
 
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_de_creation = null;
+
     public function __construct()
     {
         $this->stages = new ArrayCollection();
@@ -81,6 +84,18 @@ class Entreprise extends User
     public function setNomEntreprise(string $nom_entreprise): static
     {
         $this->nom_entreprise = $nom_entreprise;
+
+        return $this;
+    }
+
+    public function getDateDeCreation(): ?\DateTimeInterface
+    {
+        return $this->date_de_creation;
+    }
+
+    public function setDateDeCreation(?\DateTimeInterface $date_de_creation): static
+    {
+        $this->date_de_creation = $date_de_creation;
 
         return $this;
     }

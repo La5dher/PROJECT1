@@ -7,6 +7,7 @@
         "@symfony/stimulus-bridge": "^3.2.0",
         "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
         "@symfony/webpack-encore": "^4.0.0",
+        "bootstrap": "^5.3.3",
         "core-js": "^3.23.0",
         "file-loader": "^6.2.0",
         "regenerator-runtime": "^0.13.9",
@@ -21,5 +22,9 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fortawesome/fontawesome-free": "^6.5.2",
+        "axentix": "^2.4.0"
     }
 }

@@ -10,18 +10,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Certificat extends Realisation
 {
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $domaine = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $domaine = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $niveau = null;
 
-    public function getDomaine(): ?array
+    public function getDomaine(): ?string
     {
         return $this->domaine;
     }
 
-    public function setDomaine(?array $domaine): static
+    public function setDomaine(?string $domaine): static
     {
         $this->domaine = $domaine;
 
