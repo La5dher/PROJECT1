@@ -54,7 +54,6 @@ final class EtudiantFactory extends ModelFactory
             'nom' => self::faker()->word(),
             'password' => self::faker()->word(),
             'prenom' => self::faker()->word(),
-
             'roles' => [],
         ];
     }

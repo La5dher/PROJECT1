@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Entreprise;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,6 +26,12 @@ class RegistrationFormType extends AbstractType
                     'placeholder' => "exemple@gmail.com",
                     'label' => false, 
                 ]
+            ])
+            ->add('date_de_creation', DateType::class, [
+                'widget' => 'single_text', 
+                'attr' => [
+                    'label' => false,
+                ],
             ])
             ->add('nom_entreprise')
             ->add('login')

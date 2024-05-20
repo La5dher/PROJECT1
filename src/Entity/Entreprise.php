@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EntrepriseRepository;
+use App\Entity\DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -24,6 +25,13 @@ class Entreprise extends User
 
     #[ORM\Column(length: 255)]
     private ?string $nom_entreprise = null;
+
+
+    #[ORM\Column]
+    private ?bool $approuve = false;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date_de_creation = null;
 
     public function __construct()
     {
@@ -81,6 +89,32 @@ class Entreprise extends User
     public function setNomEntreprise(string $nom_entreprise): static
     {
         $this->nom_entreprise = $nom_entreprise;
+
+        return $this;
+    }
+
+    
+
+    public function isApprouve(): ?bool
+    {
+        return $this->approuve;
+    }
+
+    public function setApprouve(bool $approuve): static
+    {
+        $this->approuve = $approuve;
+
+        return $this;
+    }
+
+    public function getDateDeCreation(): ?\DateTimeInterface
+    {
+        return $this->date_de_creation;
+    }
+
+    public function setDateDeCreation(?\DateTimeInterface $date): static
+    {
+        $this->date_de_creation = $date;
 
         return $this;
     }

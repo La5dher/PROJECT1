@@ -44,17 +44,17 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $reseaux_sociaux = null;
+    #[ORM\Column(length:255, nullable: true)]
+    private ?string $reseaux_sociaux = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $telephone = null;
+    #[ORM\Column(length:255, nullable: true)]
+    private ?string $telephone = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $fixe = null;
+    #[ORM\Column(length:255, nullable: true)]
+    private ?string $fixe = null;
 
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private ?array $adresse = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $adresse = null;
 
     #[ORM\Column(length:255, nullable: true)]
     private ?string $email = null;
@@ -161,48 +161,48 @@ abstract class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getReseauxSociaux(): ?array
+    public function getReseauxSociaux(): ?string
     {
         return $this->reseaux_sociaux;
     }
 
-    public function setReseauxSociaux(?array $reseaux_sociaux): static
+    public function setReseauxSociaux(?string $reseaux_sociaux): static
     {
         $this->reseaux_sociaux = $reseaux_sociaux;
 
         return $this;
     }
 
-    public function getTelephone(): ?array
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(?array $telephone): static
+    public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
 
         return $this;
     }
 
-    public function getFixe(): ?array
+    public function getFixe(): ?string
     {
         return $this->fixe;
     }
 
-    public function setFixe(?array $fixe): static
+    public function setFixe(?string $fixe): static
     {
         $this->fixe = $fixe;
 
         return $this;
     }
 
-    public function getAdresse(): ?array
+    public function getAdresse(): ?string
     {
         return $this->adresse;
     }
 
-    public function setAdresse(?array $adresse): static
+    public function setAdresse(?string $adresse): static
     {
         $this->adresse = $adresse;
 

@@ -54,7 +54,9 @@ final class EntrepriseFactory extends ModelFactory
             'description'=>self::faker()->text(),
             'nom_entreprise'=>self::faker()->word(),
             'password' => self::faker()->word(),
+            'approuve' => false,
             'roles' => [],
+            
         ];
     }
 

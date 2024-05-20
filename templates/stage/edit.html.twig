@@ -1,13 +1,107 @@
+{# templates/stage/edit.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Stage{% endblock %}
+{% block title %}Editer stage{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Stage</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="{{ asset('images/logo.png') }}" width="50" height="50" class="d-inline-block align-top" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    {{ include('stage/_form.html.twig', {'button_label': 'Update'}) }}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_user_index') }}">Profile</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Professional
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('app_stage_index') }}">Intern</a>
+                    <a class="dropdown-item" href="{{ path('app_entreprise_index') }}">Companies</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <form class="form-inline my-2 my-lg-0 ml-2" action="{{ app.user ? path('app_logout') : path('app_login') }}">
+            <button type="submit" class="btn btn-outline-info">{{ app.user ? 'Logout' : 'Login' }}</button>
+        </form>
+    </div>
+</nav>
 
-    <a href="{{ path('app_stage_index') }}">back to list</a>
+<div class="container bootstrap snippets bootdey">
+    <div class="row">
+        <div class="profile-nav col-md-5">
+            <div class="panel">
+                <div class="user-heading round">
+                    <a href="#">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Avatar">
+                    </a>
+                    <h1>{{ app.user.login }}</h1>
+                    <p>{{ app.user.nomEntreprise }}</p>
+                    <p>{{ app.user.email }}</p>
+                </div>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_user_index') }}"><i class="fa fa-user"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fa fa-calendar"></i> Internship requested</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_user_edit', {'id': app.user.id}) }}"><i class="fa fa-edit"></i> Edit profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_stage_new') }}"><i class="fa fa-edit"></i> Add Intern</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="profile-info col-md-7">
+            {{ form_start(form) }}
+            <div class="profile-info col-md-12" style="margin-left:50%; width:500px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="texth">Edit Intern<span style="display:none">{{ form_widget(form.id_entreprise) }}</span></h1>
+                        <div class="form-group form-row">
+                            <div>
+                                   {{ include('stage/_form.html.twig') }}
 
-    {{ include('stage/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                        
+                         {{ include('stage/_delete_form.html.twig') }}
+                    </div>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 {% endblock %}
