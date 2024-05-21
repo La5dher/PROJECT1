@@ -52,7 +52,7 @@ final class StageFactory extends ModelFactory
             'titre' => self::faker()->word(),
             'description' => self::faker()->text(255),
             'competence'=>self::faker()->text(255),
-            'typeemploi'=>self::faker()->text(255),
+            'typeemploi'=>self::faker()->randomElement(['Full-time', 'Part-time', 'Contract', 'Temporary']),
             'lieutravail'=>self::faker()->text(255)
         ];
     }

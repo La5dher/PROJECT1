@@ -120,7 +120,7 @@
   <p class="card__content">Competence : {{ stage.competence }}</p>
   <p class="card__content">Type of employment: {{ stage.typeemploi }}</p>
   <p class="card__content">WorkSpace{{ stage.lieutravail }}</p>
-  <p class="card__content ">Offred by the compagny: {{stage.getIdEntreprise().getNomEntreprise()}}</p>
+  <p class="card__content ">Offred by the compagny: {# {{stage.getIdEntreprise().getNomEntreprise()}}  #}</p>
   <div class="card__date">From {{ stage.dateDebut ? stage.dateDebut|date('Y-m-d') : '' }} to {{ stage.dateFin ? stage.dateFin|date('Y-m-d') : '' }}</div>
   <div class="card__arrow">
     

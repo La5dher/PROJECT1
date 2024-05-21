@@ -48,13 +48,13 @@ final class EntrepriseFactory extends ModelFactory
     {
         return [
             'categorie' => self::faker()->word(),
-            'login' => self::faker()->unique()->word(),
-            'nom' => self::faker()->word(),
-            'prenom'=>self::faker()->word(),
+            'login' => self::faker()->unique()->userName(180),
+            'nom' => self::faker()->lastName(255),
+            'prenom'=>self::faker()->firstName(255),
             'description'=>self::faker()->text(),
-            'nom_entreprise'=>self::faker()->word(),
-            'password' => self::faker()->word(),
-            'approuve' => false,
+            'nom_entreprise'=>self::faker()->company(255),
+            'password' => self::faker()->password(),
+            'approuve' =>self::faker()->randomElement(['Approuvé', 'Non Approuvé']),
             'roles' => [],
             
         ];
