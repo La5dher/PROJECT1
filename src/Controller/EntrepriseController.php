@@ -85,14 +85,15 @@ class EntrepriseController extends AbstractController
 
 
 
-    #[Route('/find/{name}', name: 'app_entreprise_search', methods: ['GET'])]
-    public function findName(EntrepriseRepository $entrepriseRepository,Request $request): Response
-    {
-        #explode("?",explode("/",$request)[3])[0])
-        return $this->render('entreprise/index.html.twig', [
-            'entreprises' => $entrepriseRepository->findByNomEntreprise(explode("?",explode("/",$request)[3])[0]),
-        ]);
-    }
+    #[Route('/find/{nom_entreprise}', name: 'app_entreprise_search', methods: ['GET'])]
+public function findName(EntrepriseRepository $entrepriseRepository, Request $request): Response
+{
+    $nom_entreprise = $request->query->get('nom_entreprise');
+
+    return $this->render('entreprise/index.html.twig', [
+        'entreprises' => $entrepriseRepository->findByNomEntreprise($nom_entreprise),
+    ]);
+}
 
 
 

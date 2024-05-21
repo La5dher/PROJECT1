@@ -34,6 +34,7 @@ class CertificatType extends AbstractType
                 'choice_label' => 'id',
                 
             ])
+            
         ;
     }
 

@@ -6,9 +6,11 @@
         <div class="experience_text">
             <h3>{{ stage.titre }}</h3>
             <div class="sub_text">
-                <p class="text1">Google</p>
+                <p class="text1">{{stage.typeemploi}}</p>
                 <div style="width: 150px;">
-                    <p class="text2">International</p>
+                    <p class="text2">{{stage.lieutravail}}</p>
+                    <p class="text2">{{stage.getDateDebut()|date('Y-m-d')}}</p>
+                    <p class="text2">{{stage.getDateFin|date('Y-m-d')}}</p>
                 </div>
             </div>
             <div class="experience_about">
@@ -69,9 +71,9 @@
 <div class="main_container">
     <div class="search_container">
         <h3 class="animated-title">Your dream internship awaits you here</h3>
-        <form action="{{ path('app_stage_search', {'name': 'similique' }) }}">
+        <form action="{{ path('app_stage_search', {'titre': 'placeholder' }) }}">
             <div class="searchjob">
-                <input id="searchy" type="text" class="search_input_job" placeholder="Search Internship">
+                <input id="searchy" type="text" class="search_input_job" placeholder="titre" name="titre">
                 <button class="searchbutton">
                     <span class="search-icon-job material-symbols-outlined">search</span>
                 </button>
@@ -93,4 +95,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script>
+    function updateFormAction() {
+        const form = document.getElementById('searchForm');
+        const nameInput = document.getElementById('searchy').value;
+        form.action = form.action.replace('placeholder', encodeURIComponent(nameInput));
+    }
+</script>
 {% endblock %}

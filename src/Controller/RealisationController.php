@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Realisation;
 use App\Form\Realisation1Type;
+use App\Form\RealisationType;
 use App\Repository\RealisationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,7 +40,7 @@ class RealisationController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $realisation = new Realisation();
-        $form = $this->createForm(Realisation1Type::class, $realisation);
+        $form = $this->createForm(RealisationType::class, $realisation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -66,7 +67,7 @@ class RealisationController extends AbstractController
     #[Route('/{id}/edit', name: 'app_realisation_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Realisation $realisation, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Realisation1Type::class, $realisation);
+        $form = $this->createForm(RealisationType::class, $realisation);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

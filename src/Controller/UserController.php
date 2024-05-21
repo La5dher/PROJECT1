@@ -28,13 +28,16 @@ class UserController extends AbstractController
 
         if ($user instanceof \App\Entity\Etudiant) {
             $type = 'etudiant';
+            $form = $this->createForm(EtudiantType::class, $user);
         } elseif ($user instanceof \App\Entity\Entreprise) {
             $type = 'entreprise';
+            $form = $this->createForm(EntrepriseType::class, $user);
         }
         return $this->render('user/index.html.twig', [
             'users' => $userRepository->findAll(),
             'user' => $user,
             'type' => $type,
+            'form' => $form->createView()
         ]);
     }
 

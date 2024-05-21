@@ -49,7 +49,7 @@ class EntrepriseRepository extends ServiceEntityRepository
             return $this->affichePage();
         else
             return $this->createQueryBuilder('s')
-                        ->andWhere('s.nom_entreprise like :val')
+                        ->andWhere('s.nom_entreprise = :val')
                         ->setParameter('val', $value)
                         ->orderBy('s.id', 'ASC')
                         ->setMaxResults(10)

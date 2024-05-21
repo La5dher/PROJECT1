@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Experience;
 use App\Form\Experience1Type;
+use App\Form\ExperienceType;
 use App\Repository\ExperienceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,7 @@ class ExperienceController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $experience = new Experience();
-        $form = $this->createForm(Experience1Type::class, $experience);
+        $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +54,7 @@ class ExperienceController extends AbstractController
     #[Route('/{id}/edit', name: 'app_experience_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Experience $experience, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Experience1Type::class, $experience);
+        $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

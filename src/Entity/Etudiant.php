@@ -12,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 class Etudiant extends User
 {
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $NCE = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $niveau = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255,nullable: true)]
     private ?string $institut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]

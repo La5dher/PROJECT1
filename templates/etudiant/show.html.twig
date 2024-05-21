@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etudiant{% endblock %}
+
+{% block body %}
+    <h1>Etudiant</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ etudiant.id }}</td>
+            </tr>
+            <tr>
+                <th>Login</th>
+                <td>{{ etudiant.login }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ etudiant.roles ? etudiant.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ etudiant.password }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ etudiant.nom }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ etudiant.description }}</td>
+            </tr>
+            <tr>
+                <th>Reseaux_sociaux</th>
+                <td>{{ etudiant.reseauxSociaux }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ etudiant.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Fixe</th>
+                <td>{{ etudiant.fixe }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ etudiant.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ etudiant.email }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ etudiant.prenom }}</td>
+            </tr>
+            <tr>
+                <th>NCE</th>
+                <td>{{ etudiant.NCE }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ etudiant.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Institut</th>
+                <td>{{ etudiant.institut }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ etudiant.dateNaissance ? etudiant.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_etudiant_index') }}">back to list</a>
+
+    <a href="{{ path('app_etudiant_edit', {'id': etudiant.id}) }}">edit</a>
+
+    {{ include('etudiant/_delete_form.html.twig') }}
+{% endblock %}
