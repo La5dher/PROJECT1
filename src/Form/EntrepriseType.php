@@ -8,7 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
+use Symfony\Component\Form\Extension\Core\Type\DateType as TypeDateType;
 class EntrepriseType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -62,8 +62,9 @@ class EntrepriseType extends AbstractType
                 'label' => 'Company Name',
                 'attr' => ['placeholder' => 'Enter your company name'],
             ])
-            ->add('date_de_creation', null, [
+            ->add('date_de_creation', TypeDateType::class, [
                 'widget' => 'single_text',
+                'label' => 'Date of Creation',
             ]);
     }
 
