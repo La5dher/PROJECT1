@@ -10,24 +10,34 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+
 class StageType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('titre',null,[
-                'label' => 'Itern name'
+            ->add('titre', null, [
+                'label' => 'Intern name'
             ])
-            ->add('description',null,[
+            ->add('description', null, [
                 'label' => 'Description'
             ])
             ->add('date_debut', null, [
                 'widget' => 'single_text',
-                'label'=>'End date'
+                'label' => 'Start date'
             ])
             ->add('date_fin', null, [
                 'widget' => 'single_text',
-                'label'=>'Start date'
+                'label' => 'End date'
+            ])
+            ->add('competence', null, [
+                'label' => 'Competence',
+            ])
+            ->add('typeemploi', null, [
+                'label' => 'Type of employment'
+            ])
+            ->add('lieutravail', null, [
+                'label' => 'Workplace'
             ])
             ->add('id_entreprise', EntityType::class, [
                 'class' => Entreprise::class,

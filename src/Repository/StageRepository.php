@@ -48,7 +48,7 @@ class StageRepository extends ServiceEntityRepository
             return $this->affichePage();
         else
             return $this->createQueryBuilder('s')
-                        ->andWhere('s.titre like :val')
+                        ->andWhere('s.titre = :val')
                         ->setParameter('val', $value)
                         ->orderBy('s.id', 'ASC')
                         ->setMaxResults(10)

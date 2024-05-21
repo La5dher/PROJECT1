@@ -37,6 +37,15 @@ class Stage
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date_fin = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $competence = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $typeemploi = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $lieutravail = null;
+
     public function __construct()
     {
         $this->id_etudiant = new ArrayCollection();
@@ -127,6 +136,42 @@ class Stage
     public function setDateFin(\DateTimeInterface $date_fin): static
     {
         $this->date_fin = $date_fin;
+
+        return $this;
+    }
+
+    public function getCompetence(): ?string
+    {
+        return $this->competence;
+    }
+
+    public function setCompetence(?string $competence): static
+    {
+        $this->competence = $competence;
+
+        return $this;
+    }
+
+    public function getTypeemploi(): ?string
+    {
+        return $this->typeemploi;
+    }
+
+    public function setTypeemploi(?string $typeemploi): static
+    {
+        $this->typeemploi = $typeemploi;
+
+        return $this;
+    }
+
+    public function getLieutravail(): ?string
+    {
+        return $this->lieutravail;
+    }
+
+    public function setLieutravail(?string $lieutravail): static
+    {
+        $this->lieutravail = $lieutravail;
 
         return $this;
     }

@@ -85,7 +85,7 @@
     <div class="profile-info col-md-12" style="margin-left:50%; width:500px;">
         <div class="card">
             <div class="card-body">
-                <h1 class="texth">Add Certificate <span >{{ form_row(form.id_etudiant,{'value': app.user.getId()})}}</span></h1>
+                <h1 class="texth">Add Certificate <span style="display:none">{{ form_row(form.id_etudiant,{'value': app.user.id})}}</span></h1>
                 {{ include('certificat/_form.html.twig') }}                
             </div>
         </div>

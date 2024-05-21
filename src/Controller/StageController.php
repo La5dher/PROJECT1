@@ -84,18 +84,18 @@ class StageController extends AbstractController
         return $this->redirectToRoute('app_user_index'); 
     }
 
-    #[Route('/find/{name}', name: 'app_stage_search', methods: ['GET'])]
+    #[Route('/find/{titre}', name: 'app_stage_search', methods: ['GET'])]
     public function findName(StageRepository $stageRepository,Request $request): Response
     {
-        #explode("?",explode("/",$request)[3])[0])
+        $titre=$request->query->get('titre');
         return $this->render('stage/index.html.twig', [
-            'stages' => $stageRepository->findByTitre(explode("?",explode("/",$request)[3])[0]),
+            'stages' => $stageRepository->findByTitre($titre),
         ]);
     }
 
 
 
-    public function findBySearch(SearchData $searchData): PaginationInterface{
+    /*public function findBySearch(SearchData $searchData): PaginationInterface{
         $data = $this->createQueryBuilder('p')
             ->where('p.state LIKE :state')
             ->setParameter('state', '%STATE_PUBLISHED%' )
@@ -111,5 +111,5 @@ class StageController extends AbstractController
         $data = $data
             ->getQuery()
             ->getResult();
-}
+}*/
 }
